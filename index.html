@@ -15,6 +15,40 @@
     <title>Document</title>
   </head>
   <body>
+    <header>
+      <nav
+        x-data="{navbarList : ['LAYOUTS', 'SHOP PAGES', 'FEATURES', 'TESTIMONIALS' ,'SUPPORT NEW'] }"
+        class="navbar navbar-expand-lg navbar-light bg-light"
+      >
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#">wokiee</a>
+            <div class=""></div>
+            <ul class="navbar-nav mx-auto">
+              <template x-for="nav in navbarList">
+                <li class="nav-item" :key="nav">
+                  <a class="nav-link" href="#" x-text="nav"></a>
+                </li>
+              </template>
+            </ul>
+            <form class="d-flex">
+              <button class="btn btn-success btn-purchase" type="submit">PURCHASE WOKIEE</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
     <div class="col">
       <div class="row justify-content-center">
         <div x-data="{imgSlide : [1,2]}" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -63,15 +97,9 @@
         </div>
       </div>
       <div x-data="{imageCategory: [1,2,3,4,5]}" class="row category">
-        <h2 style="font-weight: 700; color: #2879fe;">
-          17364+
-        </h2>
-        <h3>
-          Shopify Sellers are Using Wokiee Theme
-        </h3>
-        <p>
-          See what others have said about their experience!
-        </p>
+        <h2 style="font-weight: 700; color: #2879fe">17364+</h2>
+        <h3>Shopify Sellers are Using Wokiee Theme</h3>
+        <p>See what others have said about their experience!</p>
         <template x-for="img in imageCategory" :key="img">
           <div class="col card__img card bg-dark text-white">
             <img
@@ -87,12 +115,15 @@
               <p class="card-text">Last updated 3 mins ago</p> -->
             </div>
           </div>
-          </div>
-          
         </template>
       </div>
     </div>
+    <footer class="">
+      <div class="col">
+        <div >Support System</div>
 
+      </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

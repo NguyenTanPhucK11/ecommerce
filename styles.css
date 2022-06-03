@@ -2,11 +2,10 @@ body {
   max-width: 100%;
   margin: auto;
   text-align: center;
-  padding: 100px;
 }
 
 .carousel {
-  width: 70% !important;
+  width: 50% !important;
 }
 
 .carousel-indicators [data-bs-target] {
@@ -27,19 +26,12 @@ body {
   font-size: 14px;
   font-weight: bold;
   padding: 16px;
-  width: 15%;
+  width: 30%;
   margin: 10px;
 }
 
 .carousel-indicators {
   position: relative;
-}
-
-nav {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  width: 100%;
 }
 
 .category {
@@ -60,4 +52,46 @@ nav {
 
 .card-img {
   height: 200px;
+}
+
+.nav-link {
+  font-size: 14px;
+}
+
+.collapse {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  box-shadow: 5px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+}
+
+.btn-purchase {
+  margin-right: 20px;
+  box-shadow: 5px 5px 10px rgb(3 167 124 / 50%);
+  padding: 10px 20px 10px 20px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.card {
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12), 0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  padding: 14px 80px 18px 36px;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.footer {
+  background-color: aliceblue;
 }

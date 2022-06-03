@@ -1,5 +1,38 @@
 body {
-  height: 3000px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  width: 70% !important;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+  background-color: black;
+}
+.row-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-btn .row-btn__btn {
+  box-shadow: 5px 5px 10px rgb(40 121 254 / 50%);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 16px;
+  width: 15%;
+  margin: 10px;
+}
+
+.carousel-indicators {
+  position: relative;
 }
 
 nav {

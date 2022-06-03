@@ -3,165 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      defer
-      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
     />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
 
-    <link rel="stylesheet" href="main.css" />
     <title>Document</title>
   </head>
   <body>
-    <nav
-      x-data="{isCollapse : false}"
-      class="flex items-center h-40 justify-between flex-wrap bg-teal-500 p-6"
-    >
-      <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <svg
-          class="fill-current h-8 w-8 mr-2"
-          width="54"
-          height="54"
-          viewBox="0 0 54 54"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"
-          />
-        </svg>
-        <span class="font-semibold text-xl tracking-tight">Web E-commerce</span>
-      </div>
-      <div class="block lg:hidden">
-        <button
-          @click="isCollapse =!isCollapse"
-          class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
-        >
-          <svg
-            class="fill-current h-3 w-3"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </button>
-      </div>
-      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div class="text-sm lg:flex-grow">
-          <a
-            href="#responsive-header"
-            :class="!isCollapse && 'hidden'"
-            class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Docs
-          </a>
-          <a
-            href="#responsive-header"
-            :class="!isCollapse && 'hidden'"
-            class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Examples
-          </a>
-          <a
-            href="#responsive-header"
-            :class="!isCollapse && 'hidden'"
-            class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-          >
-            Blog
-          </a>
-        </div>
-        <div>
-          <a
-            href="#"
-            :class="!isCollapse && 'hidden'"
-            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-            >Download</a
-          >
-        </div>
-      </div>
-    </nav>
-
-    <div class="h-screen flex flex-col justify-center items-center">
-      <div
-        class="w-5/6 relative flex flex-col justify-center items-center"
-        x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }"
-      >
-        <!-- Slides -->
-        <template x-for="slide in slides" :key="slide">
-          <div
-            x-show="activeSlide === slide"
-            class="p-24 font-bold text-5xl h-64 w-2/6 flex items-center bg-teal-500 text-white rounded-lg"
-          >
-            <span class="w-12 text-center" x-text="slide"></span>
-            <span class="text-teal-300">/</span>
-            <span class="w-12 text-center" x-text="slides.length"></span>
+    <div x-data="{imgSlide : [1,2]}" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <template x-for="img,idx in imgSlide" :key="img">
+          <div :class="idx === 0 && 'active'" class="carousel-item">
+            <img src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg" class="d-block" />
           </div>
         </template>
-
-        <!-- Prev/Next Arrows -->
-        <div class="absolute inset-x-0 flex">
-          <div class="flex items-center justify-start w-1/2">
-            <button
-              class="bg-teal-100 text-teal-500 hover:text-orange-500 font-bold hover:shadow-lg rounded-full w-12 h-12 -ml-6"
-              x-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
-            >
-              &#8592;
-            </button>
-          </div>
-          <div class="flex items-center justify-end w-1/2">
-            <button
-              class="bg-teal-100 text-teal-500 hover:text-orange-500 font-bold hover:shadow rounded-full w-12 h-12 -mr-6"
-              x-on:click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
-            >
-              &#8594;
-            </button>
-          </div>
-        </div>
-        <div class="w-1/3 flex items-center justify-center">
-          <button
-            class="w-1/2 bg-purple-500 hover:bg-purple-400 text-white m-4 p-5 rounded-lg"
-          >
-            LIVE DEMO
-          </button>
-          <button
-            class="w-1/2 bg-blue-700 hover:bg-blue-600 text-white m-4 p-5 rounded-lg"
-          >
-            EXPLORE FEATURE
-          </button>
-        </div>
-
-        <!-- Buttons -->
-        <div class="w-1/8 flex items-end justify-end px-4">
-          <template x-for="slide in slides" :key="slide">
-            <button
-              class="flex-1 w-4 h-4 mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-teal-600 hover:shadow-lg"
-              :class="{ 
-                    'bg-orange-600': activeSlide === slide,
-                    'bg-teal-300': activeSlide !== slide 
-                }"
-              x-on:click="activeSlide = slide"
-            ></button>
-          </template>
-        </div>
       </div>
+      <div class="row-btn">
+        <button class="btn btn-primary row-btn__btn">LIVE DEMO</button>
+        <button class="btn btn-primary row-btn__btn">EXPLORE FEATURES</button>
+      </div>
+      <div class="carousel-indicators">
+        <template x-for="img,idx in imgSlide">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            :data-bs-slide-to="idx"
+            :class="idx == 0 && 'active'"
+          ></button>
+        </template>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div
-      class="flex justify-center items-center"
-      x-data="{imageList : [1,2,3,4,5]}"
-    >
-      <template x-for="img in imageList" :key="img">
-        <img
-          class="rounded-xl transition delay-150 bg-blue-500 drop-shadow-2xl duration-300 hover:-translate-y-2 h-36 w-72 mx-4 my-4"
-          src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg"
-          alt=""
-        />
-      </template>
-    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

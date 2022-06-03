@@ -15,46 +15,82 @@
     <title>Document</title>
   </head>
   <body>
-    <div x-data="{imgSlide : [1,2]}" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <template x-for="img,idx in imgSlide" :key="img">
-          <div :class="idx === 0 && 'active'" class="carousel-item">
-            <img src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg" class="d-block" />
+    <div class="col">
+      <div class="row justify-content-center">
+        <div x-data="{imgSlide : [1,2]}" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <template x-for="img,idx in imgSlide" :key="img">
+              <div :class="idx === 0 && 'active'" class="carousel-item">
+                <img
+                  src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg"
+                  class="d-block"
+                />
+              </div>
+            </template>
           </div>
-        </template>
-      </div>
-      <div class="row-btn">
-        <button class="btn btn-primary row-btn__btn">LIVE DEMO</button>
-        <button class="btn btn-primary row-btn__btn">EXPLORE FEATURES</button>
-      </div>
-      <div class="carousel-indicators">
-        <template x-for="img,idx in imgSlide">
+          <div class="row-btn">
+            <button class="btn btn-primary row-btn__btn">LIVE DEMO</button>
+            <button class="btn btn-primary row-btn__btn">EXPLORE FEATURES</button>
+          </div>
+          <div class="carousel-indicators">
+            <template x-for="img,idx in imgSlide">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                :data-bs-slide-to="idx"
+                :class="idx == 0 && 'active'"
+              ></button>
+            </template>
+          </div>
           <button
+            class="carousel-control-prev"
             type="button"
             data-bs-target="#carouselExampleIndicators"
-            :data-bs-slide-to="idx"
-            :class="idx == 0 && 'active'"
-          ></button>
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div x-data="{imageCategory: [1,2,3,4,5]}" class="row category">
+        <h2 style="font-weight: 700; color: #2879fe;">
+          17364+
+        </h2>
+        <h3>
+          Shopify Sellers are Using Wokiee Theme
+        </h3>
+        <p>
+          See what others have said about their experience!
+        </p>
+        <template x-for="img in imageCategory" :key="img">
+          <div class="col card__img card bg-dark text-white">
+            <img
+              src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg"
+              class="card-img"
+            />
+            <div class="card-img-overlay">
+              <h5 class="card-title">Card title</h5>
+              <!-- <p class="card-text">
+                This is a wider card with supporting text below as a natural lead-in to additional content. This content
+                is a little bit longer.
+              </p>
+              <p class="card-text">Last updated 3 mins ago</p> -->
+            </div>
+          </div>
+          </div>
+          
         </template>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
 
     <script

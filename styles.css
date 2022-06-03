@@ -1,8 +1,8 @@
 body {
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
+  max-width: 100%;
+  margin: auto;
+  text-align: center;
+  padding: 100px;
 }
 
 .carousel {
@@ -40,4 +40,24 @@ nav {
   z-index: 1;
   top: 0;
   width: 100%;
+}
+
+.category {
+  /* width: 50%; */
+  margin: 40px;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+.card__img {
+  padding: 0px !important ;
+  margin: 12px;
+  border: none;
+}
+
+.card-img {
+  height: 200px;
 }

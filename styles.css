@@ -1,0 +1,10 @@
+body {
+  height: 3000px;
+}
+
+nav {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+}

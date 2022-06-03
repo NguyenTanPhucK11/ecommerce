@@ -93,5 +93,37 @@ body {
 }
 
 .footer {
-  background-color: aliceblue;
+  background-color: linear-gradient(180deg, #e0ecff 0%, #ffffff 100%);
+  padding: 40px;
+}
+
+.footer .footer__img {
+  padding: 24px;
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+}
+
+.footer .footer__content {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+  color: #777;
+}
+.footer__content > div {
+  color: black;
+}
+
+.footer .footer__question {
+  margin: 24px;
+  padding: 16px 24px 16px 24px;
+  box-shadow: 5px 5px 10px rgb(3 167 124 / 50%);
+}
+
+.footer .footer__overwrite {
+  padding: 30px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+  color: #777;
 }

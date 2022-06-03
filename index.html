@@ -114,6 +114,33 @@
           </div>
         </template>
       </div>
+      <div
+        x-data="{imageCategory: []}"
+        x-init="imageCategory = await (await fetch('https://fakestoreapi.com/products')).json() "
+        class="category row"
+      >
+        <h2 style="font-weight: 500">Awesome <span style="color: #2879fe">Home Page</span></h2>
+        <h2 style="font-weight: 400">Layouts Library</h2>
+        <template x-for="img in imageCategory" :key="img.id">
+          <div class="card card__library" style="width: 18rem">
+            <img :src="img.image" class="card-img-top" style="height: 200px; padding: 24px" />
+            <div class="card-body">
+              <h5 class="card-title" x-text="img.category"></h5>
+              <p class="card-text line-clamp" x-text="img.title"></p>
+              <p class="card-text"><span x-text="img.price"></span> $</p>
+
+              <p class="card-text">
+                <template x-for="s in Math.round(img.rating.rate)">
+                  <i class="bi bi-star-fill"></i>
+                </template>
+                (<span x-text="img.rating.count"></span>)
+              </p>
+
+              <a href="#" class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+        </template>
+      </div>
     </div>
     <footer class="footer">
       <div class="col">

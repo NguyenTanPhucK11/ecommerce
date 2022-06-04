@@ -59,18 +59,11 @@ body {
 }
 
 .collapse {
-  background-color: white;
   color: black;
-  padding: 20px;
   box-shadow: 5px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  width: 100%;
 }
 
 .btn-purchase {
-  margin-right: 20px;
   box-shadow: 5px 5px 10px rgb(3 167 124 / 50%);
   padding: 10px 20px 10px 20px;
   font-weight: 500;

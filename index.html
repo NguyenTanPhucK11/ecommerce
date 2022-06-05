@@ -51,6 +51,7 @@
         </div>
       </nav>
     </header>
+
     <div class="col">
       <div class="row justify-content-center g-0">
         <div x-data="{imgSlide : [1,2]}" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -66,7 +67,7 @@
           </div>
           <div class="row-btn">
             <button class="btn btn-warning row-btn__btn">LIVE DEMO</button>
-            <button class="btn btn-primary row-btn__btn">EXPLORE FEATURES</button>
+            <button class="btn btn-primary row-btn__btn">FEATURES</button>
           </div>
           <div class="carousel-indicators">
             <template x-for="img,idx in imgSlide">
@@ -98,26 +99,26 @@
           </button>
         </div>
       </div>
-      <div x-data="{imageCategory: [1,2,3,4,5]}" class="row category">
+      <div x-data="{imageCategory: [1,2,3,4,5]}" class="row justify-content-center category">
         <h2 style="font-weight: 700; color: #2879fe">17364+</h2>
         <h3>Shopify Sellers are Using Wokiee Theme</h3>
         <p>See what others have said about their experience!</p>
         <template x-for="img in imageCategory" :key="img">
-          <div class="col card__img card bg-dark text-white">
+          <div class="card__img card bg-dark text-white" style="width: 15rem">
             <img
               src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg"
               class="card-img"
             />
-            <div class="card-img-overlay">
+            <!-- <div class="card-img-overlay">
               <h5 class="card-title">Card title</h5>
-            </div>
+            </div> -->
           </div>
         </template>
       </div>
       <div
         x-data="{imageCategory: []}"
         x-init="imageCategory = await (await fetch('https://fakestoreapi.com/products')).json() "
-        class="category row"
+        class="row category justify-content-center"
       >
         <h2 style="font-weight: 500">Awesome <span style="color: #2879fe">Home Page</span></h2>
         <h2 style="font-weight: 400">Layouts Library</h2>

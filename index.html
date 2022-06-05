@@ -116,13 +116,17 @@
         </template>
       </div>
       <div
-        x-data="{imageCategory: []}"
-        x-init="imageCategory = await (await fetch('https://fakestoreapi.com/products')).json() "
         class="row category justify-content-center"
+        x-data="{imageCategory: [], listImgCurrent :[], pageCurrent :0, pageSize : 4, pageTotal:0 
+        }"
+        x-init="imageCategory = await (await fetch('https://fakestoreapi.com/products')).json(), listImgCurrent = imageCategory.slice(pageCurrent,pageCurrent+ pageSize),
+        pageTotal = Math.ceil(imageCategory.length/pageSize)"
       >
+        <!-- <div x-data="{listImgCurrent : imageCategory.slice(pageCurrent,pageSize)}"></div> -->
+
         <h2 style="font-weight: 500">Awesome <span style="color: #2879fe">Home Page</span></h2>
         <h2 style="font-weight: 400">Layouts Library</h2>
-        <template x-for="img in imageCategory" :key="img.id">
+        <template x-for="img in listImgCurrent" :key="img.id">
           <div class="card card__library" style="width: 18rem">
             <img :src="img.image" class="card-img-top" style="height: 200px; padding: 24px" />
             <div class="card-body">
@@ -141,6 +145,17 @@
             </div>
           </div>
         </template>
+        <div
+          x-data="{ 
+            fetchAPI(page) { 
+              pageCurrent = (page-1)*pageSize,
+              listImgCurrent = imageCategory.slice(pageCurrent, pageCurrent + pageSize)
+            }}"
+        >
+          <template x-for="i in pageTotal">
+            <button class="btn btn-secondary mx-2" @click="fetchAPI(i)" x-text="i"></button>
+          </template>
+        </div>
       </div>
     </div>
     <footer class="footer">

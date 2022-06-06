@@ -52,12 +52,19 @@
       </nav>
     </header>
 
-    <div class="col">
+    <div class="col mt-6">
       <div class="row justify-content-center g-0">
-        <div x-data="{imgSlide : [1,2]}" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <h2 style="font-weight: 600">Shopify Sellers are Using Wokiee Theme</h2>
+        <div
+          x-data="{imgSlide : [1,2,3], imgTitle : ['Has Sections Everywhere','is Compatible with Shopify 2.0','is Packed with Dynamic Filters']}"
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-inner">
             <template x-for="img,idx in imgSlide" :key="img">
               <div :class="idx === 0 && 'active'" class="carousel-item">
+                <h2 style="font-weight: 600; color: #2879fe" x-text="imgTitle[idx]"></h2>
                 <img
                   src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg"
                   class="d-block"

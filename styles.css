@@ -64,10 +64,21 @@ body {
 }
 
 .btn-purchase {
+  position: relative;
   box-shadow: 5px 5px 10px rgb(3 167 124 / 50%);
   padding: 10px 20px 10px 20px;
   font-weight: 500;
   font-size: 14px;
+}
+
+.cart-circle {
+  position: absolute;
+  bottom: 10%;
+  padding: 1px;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  background-color: lightblue;
 }
 
 .card {
@@ -159,5 +170,11 @@ body {
 @media only screen and (max-width: 768px) {
   .carousel {
     width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .cart-circle {
+    bottom: 2%;
   }
 }

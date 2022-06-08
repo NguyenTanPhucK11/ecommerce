@@ -17,15 +17,28 @@
   </head>
   <body
     x-data="{productCategory: [], userCart:[], listProductCurrent :[], pageCurrent :0, pageSize : 4, pageTotal:0, cartNumber : [], total:0, sumTotal(price){this.total+=price ; if(this.total <=0) {this.total =0}}, userId: null,
-    listUser:[{id:1, gmail: '1@gmail.com'}, {id:2, gmail: '2@gmail.com'},{id:3, gmail: '3@gmail.com'},{id:4, gmail: '4@gmail.com'},{id:5, gmail: '5@gmail.com'}]
+    listUser:[{id:1, gmail: '1@gmail.com'}, {id:2, gmail: '2@gmail.com'},{id:3, gmail: '3@gmail.com'},{id:4, gmail: '4@gmail.com'},{id:5, gmail: '5@gmail.com'}],
+    formatMoney(money) {
+      return '$' + money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    },
+    listType:[],
+    productType:[],
+    getListCategory() { 
+      for ([key, val] of Object.entries(this.productCategory)) {
+        this.productType.push(val.category)
+      };
+      this.listType = [...new Set(this.productType)];
+    }
     }"
-    x-init="
-    productCategory = await (await fetch('https://fakestoreapi.com/products')).json(), 
+    x-init="productCategory = await (await fetch('https://fakestoreapi.com/products')).json(), 
     userCart = await (await fetch('https://fakestoreapi.com/carts')).json(),
     userId = getCurrUser(),
     cartNumber = userId !== null ? userCart.find(cart=>cart.id === listUser.find(u => u.gmail === userId?.email).id).products : cartNumber,
     listProductCurrent = productCategory.slice(pageCurrent,pageCurrent+ pageSize),
-    pageTotal = Math.ceil(productCategory.length/pageSize)"
+    pageTotal = Math.ceil(productCategory.length/pageSize),
+    productType = [],
+    getListCategory()
+    "
   >
     <header>
       <nav
@@ -97,8 +110,9 @@
                     <div class="col align-self-center pb-4">
                       <img :src="newProduct.image" style="height: 60px; width: 60px" />
                     </div>
-                    <div class="col align-self-center pb-4"><span x-text="newProduct.price"></span> $</div>
-
+                    <div class="col align-self-center pb-4">
+                      <span x-text="formatMoney(newProduct.price)"></span>
+                    </div>
                     <div class="col align-self-center pb-4">
                       <i class="bi bi-dash" @click="sumTotal(-newProduct.price), item.quantity--"></i>
                       <span x-text="item.quantity"></span>
@@ -106,10 +120,9 @@
                     </div>
                     <div class="col align-self-center pb-4">
                       <span
-                        x-text="(newProduct.price * item.quantity).toFixed(2)"
+                        x-text="formatMoney(newProduct.price * item.quantity)"
                         x-data="sumTotal(newProduct.price * item.quantity)"
                       ></span>
-                      $
                     </div>
                     <hr />
                   </div>
@@ -117,7 +130,9 @@
               </template>
               <div class="row total justify-content-around">
                 <div class="col">Total</div>
-                <div class="col"><span x-text="total.toFixed(2)"></span> $</div>
+                <div class="col">
+                  <span x-money="productPrice" x-text="formatMoney(total)"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -195,16 +210,30 @@
           </div>
         </template>
       </div>
-      <div class="row category justify-content-center">
+      <div
+        class="row category justify-content-center"
+        x-data="{searchCategory(type){
+          listProductCurrent = []
+          for([key, value] of Object.entries(productCategory)){
+            value.category === type  && listProductCurrent.push(value)
+          }
+        }};
+        "
+      >
         <h2 style="font-weight: 500">Awesome <span style="color: #2879fe">Home Page</span></h2>
         <h2 style="font-weight: 400">Layouts Library</h2>
-        <template x-for="product in listProductCurrent" :key="product.id">
+        <div class="row justify-content-start">
+          <template x-for="type in listType" x-data="">
+            <button class="col btn btn-primary mx-2" @click="searchCategory(type)" x-text="type"></button>
+          </template>
+        </div>
+        <template x-for="product in listProductCurrent" :key="product.id" x-model="listProductCurrent">
           <div class="card card__library" style="width: 18rem">
             <img :src="product.image" class="card-img-top" style="height: 200px; padding: 24px" />
             <div class="card-body">
               <h5 class="card-title" x-text="product.category"></h5>
               <p class="card-text line-clamp" x-text="product.title"></p>
-              <p class="card-text"><span x-text="product.price"></span> $</p>
+              <p class="card-text"><span x-text="formatMoney(product.price)"></span></p>
 
               <p class="card-text">
                 <template x-for="s in Math.round(product.rating.rate)">

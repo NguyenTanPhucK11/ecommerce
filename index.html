@@ -16,10 +16,11 @@
     <title>Document</title>
   </head>
   <body
-    x-data="{productCategory: [], userCart:[], listProductCurrent :[], pageCurrent :0, pageSize : 4, pageTotal:0, cartNumber : [], total:0, sumTotal(price){this.total+=price ; if(this.total <=0) {this.total =0}}, userId :{},
+    x-data="{productCategory: [], userCart:[], listProductCurrent :[], pageCurrent :0, pageSize : 4, pageTotal:0, cartNumber : [], total:0, sumTotal(price){this.total+=price ; if(this.total <=0) {this.total =0}}, userId: null,
     listUser:[{id:1, gmail: '1@gmail.com'}, {id:2, gmail: '2@gmail.com'},{id:3, gmail: '3@gmail.com'},{id:4, gmail: '4@gmail.com'},{id:5, gmail: '5@gmail.com'}]
     }"
-    x-init="productCategory = await (await fetch('https://fakestoreapi.com/products')).json(), 
+    x-init="
+    productCategory = await (await fetch('https://fakestoreapi.com/products')).json(), 
     userCart = await (await fetch('https://fakestoreapi.com/carts')).json(),
     userId = getCurrUser(),
     cartNumber = userId !== null ? userCart.find(cart=>cart.id === listUser.find(u => u.gmail === userId?.email).id).products : cartNumber,
@@ -62,7 +63,6 @@
                   id="btn-cart"
                   data-bs-toggle="modal"
                   data-bs-target="#cart"
-                  @click="console.log(userId !== null);"
                 >
                   <i class="bi bi-cart"></i>
                 </button>
@@ -81,7 +81,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="cartLabel" x-text="userId?.email"></h5>
-            <a class="px-2" onclick="logOut()" data-bs-dismiss="modal" x-text="userId !== null ? 'log out' : ''"></a>
+            <a class="px-2" onclick="logOut()" data-bs-dismiss="modal" x-text="userId === null ? '' :'log out' "></a>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -102,7 +102,7 @@
                     <div class="col align-self-center pb-4">
                       <i class="bi bi-dash" @click="sumTotal(-newProduct.price), item.quantity--"></i>
                       <span x-text="item.quantity"></span>
-                      <i class="bi bi-plus" @click="item.quantity++, sumTotal(+newProduct.price)"></i>
+                      <i class="bi bi-plus" @click="item.quantity++, sumTotal(newProduct.price)"></i>
                     </div>
                     <div class="col align-self-center pb-4">
                       <span
@@ -217,14 +217,12 @@
                 href="#"
                 class="btn btn-primary"
                 @click=" 
-
                 newCart =cartNumber?.find(card=>card.productId === product.id)
                 if(newCart) {
                   newCart.quantity++;
                   sumTotal(productCategory.find(productCategory => productCategory.id === product.id).price)
                 } else{
                   cartNumber.push({productId : product.id, quantity:1})
-                  sumTotal(productCategory.find(productCategory => productCategory.id === product.id).price)
                 }"
               >
                 Add to cart

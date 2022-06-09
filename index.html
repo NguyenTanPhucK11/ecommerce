@@ -230,9 +230,18 @@
       >
         <h2 style="font-weight: 500">Awesome <span style="color: #2879fe">Home Page</span></h2>
         <h2 style="font-weight: 400">Layouts Library</h2>
-        <div class="row justify-content-start">
-          <template x-for="type in listType" x-data="">
-            <button class="col btn btn-primary mx-2" @click="searchCategory(type)" x-text="type"></button>
+        <div>
+          <template
+            x-for="type in listType"
+            x-data="{colorButton : ['btn-primary','btn-secondary','btn-success','btn-danger','btn-warning','btn-info','btn-dark'],
+                randomColorButton (){
+                btnRandom = this.colorButton[6];
+                this.colorButton.slice(2, this.colorButton.length)
+                return btnRandom + ' btn m-2';
+              },
+            }"
+          >
+            <button :class="randomColorButton" @click="searchCategory(type)" x-text="type"></button>
           </template>
         </div>
         <template x-for="product in listProductCurrent" :key="product.id" x-model="listProductCurrent">

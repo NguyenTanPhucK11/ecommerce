@@ -16,27 +16,28 @@
     <title>Document</title>
   </head>
   <body
-    x-data="{productCategory: [], userCart:[], listProductCurrent :[], pageCurrent :0, pageSize : 4, pageTotal:0, cartNumber : [], total:0, sumTotal(price){this.total+=price ; if(this.total <=0) {this.total =0}}, userId: null,
+    x-data="{productCategory: [], userCart:[],productSorting :[], listProductCurrent :[], pageCurrent :0, pageSize : 4, pageTotal:0, cartNumber : [], total:0, sumTotal(price){this.total+=price ; if(this.total <=0) {this.total =0}}, userId: null,
     listUser:[{id:1, gmail: '1@gmail.com'}, {id:2, gmail: '2@gmail.com'},{id:3, gmail: '3@gmail.com'},{id:4, gmail: '4@gmail.com'},{id:5, gmail: '5@gmail.com'}],
     formatMoney(money) {
       return '$' + money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     },
     listType:[],
-    productType:[],
+    productType:['all'],
+    
     getListCategory() { 
-      for ([key, val] of Object.entries(this.productCategory)) {
+      for ([key, val] of Object.entries(this.productSorting)) {
         this.productType.push(val.category)
       };
       this.listType = [...new Set(this.productType)];
     }
     }"
     x-init="productCategory = await (await fetch('https://fakestoreapi.com/products')).json(), 
+    productSorting = [...productCategory],
     userCart = await (await fetch('https://fakestoreapi.com/carts')).json(),
     userId = getCurrUser(),
     cartNumber = userId !== null ? userCart.find(cart=>cart.id === listUser.find(u => u.gmail === userId?.email).id).products : cartNumber,
-    listProductCurrent = productCategory.slice(pageCurrent,pageCurrent+ pageSize),
-    pageTotal = Math.ceil(productCategory.length/pageSize),
-    productType = [],
+    listProductCurrent = productSorting.slice(pageCurrent,pageCurrent+ pageSize)
+    pageTotal = Math.ceil(productSorting.length/pageSize)
     getListCategory()
     "
   >
@@ -101,11 +102,11 @@
             <div class="cartItems">
               <template x-for="item,idx in cartNumber">
                 <template
-                  x-if="productCategory.find(productCategory => productCategory.id === item.productId) && item.quantity"
+                  x-if="productSorting.find(productSorting => productSorting.id === item.productId) && item.quantity"
                 >
                   <div
                     class="row p-2"
-                    x-data="{newProduct : productCategory.find(productCategory => productCategory.id === item.productId)}"
+                    x-data="{newProduct : productSorting.find(productSorting => productSorting.id === item.productId)}"
                   >
                     <div class="col align-self-center pb-4">
                       <img :src="newProduct.image" style="height: 60px; width: 60px" />
@@ -197,11 +198,11 @@
           </button>
         </div>
       </div>
-      <div x-data="{productCategory: [1,2,3,4,5]}" class="row justify-content-center category">
+      <div x-data="{productSorting: [1,2,3,4,5]}" class="row justify-content-center category">
         <h2 style="font-weight: 700; color: #2879fe">17364+</h2>
         <h3>Shopify Sellers are Using Wokiee Theme</h3>
         <p>See what others have said about their experience!</p>
-        <template x-for="img in productCategory" :key="img">
+        <template x-for="img in productSorting" :key="img">
           <div class="card__img card bg-dark text-white" style="width: 15rem">
             <img
               src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg"
@@ -213,10 +214,17 @@
       <div
         class="row category justify-content-center"
         x-data="{searchCategory(type){
-          listProductCurrent = []
-          for([key, value] of Object.entries(productCategory)){
-            value.category === type  && listProductCurrent.push(value)
+          listProductSorting = []
+          if(type === 'all'){
+            listProductSorting = [...productCategory]
+          } else {
+            for([key, value] of Object.entries(productCategory)){
+              value.category === type  && listProductSorting.push(value)
+            }
           }
+          productSorting = [...listProductSorting]
+          listProductCurrent = productSorting.slice(0,4)
+          pageTotal = Math.ceil(productSorting.length/pageSize)
         }};
         "
       >
@@ -249,7 +257,7 @@
                 newCart =cartNumber?.find(card=>card.productId === product.id)
                 if(newCart) {
                   newCart.quantity++;
-                  sumTotal(productCategory.find(productCategory => productCategory.id === product.id).price)
+                  sumTotal(productSorting.find(productSorting => productSorting.id === product.id).price)
                 } else{
                   cartNumber.push({productId : product.id, quantity:1})
                 }"
@@ -263,7 +271,7 @@
           x-data="{ 
             fetchAPI(page) { 
               pageCurrent = (page-1)*pageSize,
-              listProductCurrent = productCategory.slice(pageCurrent, pageCurrent + pageSize)
+              listProductCurrent = productSorting.slice(pageCurrent, pageCurrent + pageSize)
             }}"
         >
           <template x-for="i in pageTotal">

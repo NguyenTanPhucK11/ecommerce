@@ -245,10 +245,9 @@
           </template>
         </div>
         <template x-for="product in listProductCurrent" :key="product.id" x-model="listProductCurrent">
-          <div class="card card__library" style="width: 18rem">
+          <div class="card card__library" style="width: 18rem" @click="window.location.href = 'detail.html'">
             <img :src="product.image" class="card-img-top" style="height: 200px; padding: 24px" />
             <div class="card-body">
-              <a routerlink="/abcd" target="_self">123</a>
               <h5 class="card-title" x-text="product.category"></h5>
               <p class="card-text line-clamp" x-text="product.title"></p>
               <p class="card-text"><span x-text="formatMoney(product.price)"></span></p>

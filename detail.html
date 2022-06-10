@@ -16,9 +16,19 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="row detail justify-content-center" style="padding-top: 80px">
-      <div class="col">
-        <img src="https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg" alt="" />
+    <div
+      class="row detail justify-content-center"
+      style="padding-top: 80px"
+      x-data="{productDetail :[], count : 0}"
+      x-init="
+      detailPathname = window.location.pathname;
+      console.log(detailPathname);
+      productDetail = await (await fetch('https://fakestoreapi.com/products/1')).json();
+      count = productDetail.rating.count;
+      "
+    >
+      <div class="col-7">
+        <img :src="productDetail.image" width="50%" alt="" />
       </div>
       <div class="col text-start" x-data="{star:2.4}">
         <div>
@@ -28,17 +38,14 @@
               style="color: #ffc107"
             ></i>
           </template>
-          <span style="font-size: 15px">3 reviews</span>
+          <span style="font-size: 15px"><span x-text="count"></span> reviews</span>
         </div>
-        <div class="detail__type py-3">Product Type: <span>Type</span></div>
-        <h2 class="detail__title py-3">Hentum Tosmois de Cras Tele Hamo Dincidunts</h2>
-        <h2 class="detail__price py-3">$49.00</h2>
-        <p class="detail__description py-3">
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-          atque corrupti quos dolores et quas molestias excepturi sint occaecati del cupiditate non provident, similique
-          sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
-          facilis est..
-        </p>
+        <div class="detail__type py-3">Product Type: <span x-text="productDetail.category"></span></div>
+        <h2 class="detail__title py-3" x-text="productDetail.title">
+          Hentum Tosmois de Cras Tele Hamo " x-text = "productDetail.title">
+        </h2>
+        <h2 class="detail__price py-3">$ <span x-text="productDetail.price"></span></h2>
+        <p class="detail__description py-3" x-text="productDetail.description"></p>
         <div class="detail__quantity py-3">Quantity</div>
         <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" style="padding: 10px" />
         <div class="form-check detail__terms py-3">

@@ -21,9 +21,9 @@
       style="padding-top: 80px"
       x-data="{productDetail :[], count : 0}"
       x-init="
-      detailPathname = window.location.pathname;
+      detailPathname = window.location.search.split('?')[1] ;
       console.log(detailPathname);
-      productDetail = await (await fetch('https://fakestoreapi.com/products/1')).json();
+      productDetail = await (await fetch('https://fakestoreapi.com/products/' + detailPathname)).json();
       count = productDetail.rating.count;
       "
     >

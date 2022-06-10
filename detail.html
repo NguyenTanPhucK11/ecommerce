@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="row detail justify-content-center" style="padding-top: 80px">
+      <div class="col">
+        <img src="https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg" alt="" />
+      </div>
+      <div class="col text-start" x-data="{star:2.4}">
+        <div>
+          <template x-for="i in 5">
+            <i
+              :class=" i <= star ? 'bi bi-star-fill' : (!Number.isInteger(star) && i < star + 1 ? 'bi bi-star-half' : 'bi bi-star' )"
+              style="color: #ffc107"
+            ></i>
+          </template>
+          <span style="font-size: 15px">3 reviews</span>
+        </div>
+        <div class="detail__type py-3">Product Type: <span>Type</span></div>
+        <h2 class="detail__title py-3">Hentum Tosmois de Cras Tele Hamo Dincidunts</h2>
+        <h2 class="detail__price py-3">$49.00</h2>
+        <p class="detail__description py-3">
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque corrupti quos dolores et quas molestias excepturi sint occaecati del cupiditate non provident, similique
+          sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
+          facilis est..
+        </p>
+        <div class="detail__quantity py-3">Quantity</div>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" style="padding: 10px" />
+        <div class="form-check detail__terms py-3">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+          <label class="form-check-label" for="flexCheckDefault">
+            <span>I agree with the a Terms & conditions</span></label
+          >
+        </div>
+        <button class="btn btn-primary w-50">Add to cart</button>
+      </div>
+    </div>
+  </body>
+</html>

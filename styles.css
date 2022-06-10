@@ -171,6 +171,20 @@ body {
   width: 400px;
 }
 
+.detail__title {
+}
+.detail__price {
+}
+.detail__description {
+}
+
+.detail__type {
+}
+.detail__quantity {
+}
+.detail__term {
+}
+
 @media only screen and (min-width: 1440px) {
   body {
     width: 1440px;

@@ -19,12 +19,13 @@
     <div
       class="row detail justify-content-center"
       style="padding: 80px"
-      x-data="{productDetail :[], count : 0, rate:0}"
+      x-data="{productDetail :[], count : 0, rate:0, totalPrice : 0}"
       x-init="
       detailPathname = window.location.search.split('?')[1] ;
       productDetail = await (await fetch('https://fakestoreapi.com/products/' + detailPathname)).json();
       count = productDetail.rating.count;
-      rate =  productDetail.rating.rate;"
+      rate =  productDetail.rating.rate;
+      "
     >
       <div class="col-7">
         <img :src="productDetail.image" width="50%" alt="" />
@@ -40,13 +41,21 @@
           <span style="font-size: 15px"><span x-text="count"></span> reviews</span>
         </div>
         <div class="detail__type py-3">Product Type: <span x-text="productDetail.category"></span></div>
-        <h2 class="detail__title py-3" x-text="productDetail.title">
-          Hentum Tosmois de Cras Tele Hamo " x-text = "productDetail.title">
-        </h2>
-        <h2 class="detail__price py-3">$ <span x-text="productDetail.price"></span></h2>
+        <h2 class="detail__title py-3" x-text="productDetail.title">Hentum Tosmois de Cras Tele Hamo ></h2>
+        <h2 class="detail__price py-3">$ <span x-text="totalPrice*  productDetail.price"></span></h2>
         <p class="detail__description py-3" x-text="productDetail.description"></p>
         <div class="detail__quantity py-3">Quantity</div>
-        <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" style="padding: 10px" />
+
+        <input
+          type="number"
+          id="quantity"
+          x-model="totalPrice"
+          name="quantity"
+          :value="totalPrice"
+          min="1"
+          max="10"
+          style="padding: 10px"
+        />
         <div class="form-check detail__terms py-3">
           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
           <label class="form-check-label" for="flexCheckDefault">

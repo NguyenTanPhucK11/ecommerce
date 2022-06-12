@@ -18,23 +18,22 @@
   <body>
     <div
       class="row detail justify-content-center"
-      style="padding-top: 80px"
-      x-data="{productDetail :[], count : 0}"
+      style="padding: 80px"
+      x-data="{productDetail :[], count : 0, rate:0}"
       x-init="
       detailPathname = window.location.search.split('?')[1] ;
-      console.log(detailPathname);
       productDetail = await (await fetch('https://fakestoreapi.com/products/' + detailPathname)).json();
       count = productDetail.rating.count;
-      "
+      rate =  productDetail.rating.rate;"
     >
       <div class="col-7">
         <img :src="productDetail.image" width="50%" alt="" />
       </div>
-      <div class="col text-start" x-data="{star:2.4}">
+      <div class="col text-start">
         <div>
           <template x-for="i in 5">
             <i
-              :class=" i <= star ? 'bi bi-star-fill' : (!Number.isInteger(star) && i < star + 1 ? 'bi bi-star-half' : 'bi bi-star' )"
+              :class=" i <= rate ? 'bi bi-star-fill' : (!Number.isInteger(rate) && i < rate + 1 ? 'bi bi-star-half' : 'bi bi-star' )"
               style="color: #ffc107"
             ></i>
           </template>

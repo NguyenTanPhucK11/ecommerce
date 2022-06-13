@@ -19,7 +19,7 @@
     <div
       class="row detail justify-content-center"
       style="padding: 80px"
-      x-data="{productDetail :[], count : 0, rate:0, totalPrice : 0}"
+      x-data="{productDetail :[], count : 0, rate:0, totalPrice : 1}"
       x-init="
       detailPathname = window.location.search.split('?')[1] ;
       productDetail = await (await fetch('https://fakestoreapi.com/products/' + detailPathname)).json();
@@ -42,7 +42,7 @@
         </div>
         <div class="detail__type py-3">Product Type: <span x-text="productDetail.category"></span></div>
         <h2 class="detail__title py-3" x-text="productDetail.title">Hentum Tosmois de Cras Tele Hamo ></h2>
-        <h2 class="detail__price py-3">$ <span x-text="totalPrice*  productDetail.price"></span></h2>
+        <h2 class="detail__price py-3">$<span x-text="totalPrice*  productDetail.price"></span></h2>
         <p class="detail__description py-3" x-text="productDetail.description"></p>
         <div class="detail__quantity py-3">Quantity</div>
 

@@ -19,7 +19,7 @@
     <div
       class="row detail justify-content-center"
       style="padding: 80px"
-      x-data="{productDetail :[], count : 0, rate:0, totalPrice : 1}"
+      x-data="{productDetail :[], count : 1, rate:0, totalPrice : 0}"
       x-init="
       detailPathname = window.location.search.split('?')[1] ;
       productDetail = await (await fetch('https://fakestoreapi.com/products/' + detailPathname)).json();

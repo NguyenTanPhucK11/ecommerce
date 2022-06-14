@@ -64,7 +64,7 @@ class Header extends HTMLElement {
     <div 
   >    
     <nav
-        x-data="{navbarList : ['LAYOUTS', 'SHOP PAGES', 'FEATURES', 'TESTIMONIALS' ,'SUPPORT NEW']}"
+        x-data="{navbarList : ['LAYOUTS', 'CATEGORY', 'FEATURES', 'TESTIMONIALS' ,'SUPPORT NEW']}"
         class="navbar fixed-top navbar-expand-lg navbar-light bg-light"
       >
         <div class="container-fluid">
@@ -84,7 +84,7 @@ class Header extends HTMLElement {
             <ul class="navbar-nav mx-auto">
               <template x-for="nav in navbarList">
                 <li class="nav-item" :key="nav">
-                  <a class="nav-link" href="#" x-text="nav"></a>
+                  <a class="nav-link" href="/category.html" x-text="nav"></a>
                 </li>
               </template>
             </ul>

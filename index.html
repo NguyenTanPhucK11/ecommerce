@@ -21,23 +21,26 @@
     formatMoney(money) {
       return '$' + money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     },
+
     listType:[],
-    productType:['all'],
-    getListCategory() { 
-      for ([key, val] of Object.entries(this.productSorting)) {
-        this.productType.push(val.category)
-      };
-      this.listType = [...new Set(this.productType)];
-    }
+    listTypeImg:[
+    'https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg',
+    'https://media-exp1.licdn.com/dms/image/C4E1BAQGENeCDJ5VXPg/company-background_10000/0/1559151958971?e=2147483647&v=beta&t=0e2c7AyjkD1Pe35JYdvOWJk1yBr5EFS3hUqkuKod2Ig',
+    'https://www.chanel.com/apac/img/prd-emea/sys-master/content/hd0/h5e/9485397164062',
+    'https://cdn-images.farfetch-contents.com/17/92/26/71/17922671_38308149_300.jpg',
+    'https://i.insider.com/602bea612edd0f001a8d5dfe?width=750&format=jpeg&auto=webp',
+    ],
     }"
     x-init="productCategory = await (await fetch('https://fakestoreapi.com/products')).json(), 
+    listType = await (await fetch('https://fakestoreapi.com/products/categories')).json(),
+    listType.unshift('all'),
     productSorting = [...productCategory],
     userCart = await (await fetch('https://fakestoreapi.com/carts')).json(),
     userId = getCurrUser(),
     cartNumber = userId !== null ? userCart.find(cart=>cart.id === listUser.find(u => u.gmail === userId?.email).id).products : cartNumber,
     listProductCurrent = productSorting.slice(pageCurrent,pageCurrent+ pageSize)
     pageTotal = Math.ceil(productSorting.length/pageSize)
-    getListCategory()
+
     "
   >
     <header class="header">
@@ -97,7 +100,7 @@
         </div>
       </div>
     </div>
-    <div class="col mt-6">
+    <div class="col mt-7">
       <div class="row justify-content-center g-0">
         <h2 style="font-weight: 600">Shopify Sellers are Using Wokiee Theme</h2>
         <div
@@ -151,16 +154,15 @@
           </button>
         </div>
       </div>
-      <div x-data="{productSorting: [1,2,3,4,5]}" class="row justify-content-center category">
+      <div class="row justify-content-center category">
         <h2 style="font-weight: 700; color: #2879fe">17364+</h2>
         <h3>Shopify Sellers are Using Wokiee Theme</h3>
         <p>See what others have said about their experience!</p>
-        <template x-for="img in productSorting" :key="img">
-          <div class="card__img card bg-dark text-white" style="width: 15rem">
-            <img
-              src="https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg"
-              class="card-img"
-            />
+
+        <template class="row" x-for="img,idx in listType" :key="img">
+          <div class="category__img" style="width: 18rem">
+            <img width="100px" height="100px" :src="listTypeImg[idx]" />
+            <h5 x-text="listType[idx]"></h5>
           </div>
         </template>
       </div>
@@ -218,7 +220,8 @@
                 href="#"
                 class="btn btn-primary"
                 @click=" 
-                newCart =cartNumber?.find(card=>card.productId === product.id)
+                event.stopPropagation();
+                newCart = cartNumber?.find(card=>card.productId === product.id)
                 if(newCart) {
                   newCart.quantity++;
                   sumTotal(productSorting.find(productSorting => productSorting.id === product.id).price)

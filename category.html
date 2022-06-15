@@ -38,10 +38,15 @@
       isASCPrice : null,
       isASCStar : null,
       isBlur : false,
+      isChooseColor : false,
       sale : 0,
       waitBlur(){
         this.isBlur = true;
         setTimeout(()=>{this.isBlur = false; }, 1200);
+      },
+      handleClickColor(){
+        this.isChooseColor = !this.isChooseColor
+        console.log(123);
       },
       randomSale(){
         this.sale = (Math.floor(Math.random() * 30) + 11)/100;
@@ -88,11 +93,9 @@
         <div class="refine__title"><i class="bi bi-dash-lg"></i> COLOR</div>
         <div class="container row justify-content-start my-4">
           <template x-for="color in listColor">
-            <div
-              class="refine__color"
-              @click="refineColor.push(color); console.log(refineColor);filterColor()"
-              :style="{backgroundColor : color}"
-            ></div>
+            <div class="refine__color" @click="filterColor(); handleClickColor()" :style="{backgroundColor : color}">
+              <i :class="isChooseColor ? 'bi bi-check-lg' : ''" style="color: rgb(65, 8, 122)"></i>
+            </div>
           </template>
         </div>
         <hr class="refine__hr" />
@@ -227,9 +230,13 @@
                       from
                       <span class="product__price" x-text="'$' + product.price"></span>
                     </p>
-                    <div class="row p-2">
+                    <div class="row p-1">
                       <template x-for="color in newRandomColor">
-                        <div class="refine__color" :style="{backgroundColor : color}"></div>
+                        <div
+                          class="refine__color"
+                          style="width: 24px; height: 24px"
+                          :style="{backgroundColor : color}"
+                        ></div>
                       </template>
                     </div>
                     <button class="btn product__addToCart btn-outline-primary my-4">Add to cart</button>

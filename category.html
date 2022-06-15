@@ -53,11 +53,11 @@
         return this.sale;
       },
       sortPrice() {
-        this.isASCPrice =!this.isASCPrice ;
+        this.isASCPrice = this.isASCPrice === null ? this.isASCPrice === true : !this.isASCPrice ;
         this.listProduct.sort((a, b) =>this.isASCPrice ? a.price - b.price : b.price - a.price);
       },
       sortStar() {
-        this.isASCStar = !this.isASCStar;
+        this.isASCStar = this.isASCStar === null ? this.isASCStar === true : !this.isASCStar ;
         this.listProduct.sort((a, b) =>this.isASCStar ? a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate);
       }, 
       randomListColor(){
@@ -93,7 +93,7 @@
         <div class="refine__title"><i class="bi bi-dash-lg"></i> COLOR</div>
         <div class="container row justify-content-start my-4">
           <template x-for="color in listColor">
-            <div class="refine__color" @click="filterColor(); handleClickColor()" :style="{backgroundColor : color}">
+            <div class="refine__color" :style="{backgroundColor : color}">
               <i :class="isChooseColor ? 'bi bi-check-lg' : ''" style="color: rgb(65, 8, 122)"></i>
             </div>
           </template>
@@ -179,21 +179,21 @@
           <div class="col">
             PRICE
             <i
-              :class="isASCPrice === null ? 'bi bi-arrow-down-up' : (isASCPrice ? 'bi bi-arrow-down' : 'bi bi-arrow-up' )"
+              :class="isASCPrice === null ? 'bi bi-arrow-down-up' : (isASCPrice ? 'bi bi-arrow-up' : 'bi bi-arrow-down' )"
               @click="sortPrice()"
             ></i>
           </div>
           <div class="col">
             STAR
             <i
-              :class="isASCStar === null ? 'bi bi-arrow-down-up' : (isASCStar ? 'bi bi-arrow-down' : 'bi bi-arrow-up')"
+              :class="isASCStar === null ? 'bi bi-arrow-down-up' : (isASCStar ? 'bi bi-arrow-up' : 'bi bi-arrow-down')"
               @click="sortStar()"
             ></i>
           </div>
         </div>
 
         <div
-          class="spinner-grow text-primary"
+          class="loading spinner-grow text-primary"
           x-show="isLoading"
           style="margin-top: 100px; width: 3rem; height: 3rem"
           role="status"

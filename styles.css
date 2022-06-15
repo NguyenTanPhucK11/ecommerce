@@ -265,6 +265,12 @@ body {
   border: none;
 }
 
+.loading {
+  position: fixed; /* or absolute */
+  top: 40%;
+  left: 60%;
+}
+
 @media only screen and (min-width: 1440px) {
   .detail {
     width: 1440px;

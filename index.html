@@ -192,12 +192,7 @@
       >
         <h2 style="font-weight: 500">Awesome <span style="color: #2879fe">Home Page</span></h2>
         <h2 style="font-weight: 400">Layouts Library</h2>
-        <div
-          class="spinner-grow"
-          x-show="isLoading"
-          style="margin-top: 100px; width: 3rem; height: 3rem"
-          role="status"
-        ></div>
+
         <div>
           <template
             x-for="type in listType"
@@ -212,6 +207,12 @@
             <button :class="randomColorButton" @click="searchCategory(type)" x-text="type"></button>
           </template>
         </div>
+        <div
+          class="spinner-grow"
+          x-show="isLoading"
+          style="margin-top: 100px; width: 3rem; height: 3rem"
+          role="status"
+        ></div>
         <template x-for="product in listProductCurrent" :key="product.id" x-model="listProductCurrent">
           <div
             class="card card__library"

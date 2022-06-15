@@ -55,12 +55,13 @@
         return this.sale;
       },
       sortPrice() {
-        this.isASCPrice = this.isASCPrice === null ? this.isASCPrice === true : !this.isASCPrice ;
-        this.listProduct.sort((a, b) =>this.isASCPrice ? a.price - b.price : b.price - a.price);
+        this.isASCPrice = this.isASCPrice === null ? this.isASCPrice = true : !this.isASCPrice ;
+
+        this.listProduct.sort((a, b) => this.isASCPrice ? b.price - a.price : a.price - b.price);
       },
       sortStar() {
-        this.isASCStar = this.isASCStar === null ? this.isASCStar === true : !this.isASCStar ;
-        this.listProduct.sort((a, b) =>this.isASCStar ? a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate);
+        this.isASCStar = this.isASCStar === null ? this.isASCStar = true : !this.isASCStar ;
+        this.listProduct.sort((a, b) => this.isASCStar ? b.rating.rate - a.rating.rate : a.rating.rate - b.rating.rate);
       }, 
       randomListColor(){
         this.randomColor = []
@@ -176,7 +177,7 @@
         </div>
       </div>
       <div class="col-12 col-sm-7 col-lg-9 col-xxl-10">
-        <span x-data="{date: new Date()}" x-text="date.toLocaleString()"></span>
+        <!-- <span x-data="{date: new Date()}" x-text="date.toLocaleString()"></span> -->
         <div class="row justify-content-start">
           <div class="col">
             PRICE
@@ -221,7 +222,7 @@
                         style="color: #ffc107"
                       ></i>
                     </template>
-                    <span x-text="product.rating.count" ></span>
+                    <span x-text="product.rating.count"></span>
                     <p class="product__title line-clamp mt-1"><span x-text="product.title"></span></p>
                   </div>
                   <div class="card-footer">
@@ -246,7 +247,7 @@
             </template>
           </template>
         </div>
-        <div x-show="!isLoading" class=" px-3" x-data="{ expanded: false }">
+        <div x-show="!isLoading" class="px-3" x-data="{ expanded: false }">
           <p class="text-start" x-show="expanded" x-collapse.min.50px>
             Custom CMS Block - Phasellus volutpat magna id mauris sodales et ornare urna molestie. Mauris non sem
             tincidunt, hendrerit nisi quis honcus felis. Suspendisse tempus mi durna in mattis nisl egestas quis. Proin
@@ -254,14 +255,15 @@
             malesuada at. Nulla vel ante magna. Cras ultricies nulla porttitor metus cursus malesuada. Sed convallis
             tempor ante ac semperos. It was popularised in the 1960s with the release of Letraset sheets containing
             Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum. </br></br> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
-            a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
-            professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur,
-            from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the
-            undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"
-            (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of
-            ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
-            comes from a line in section 1.10.32.
+            versions of Lorem Ipsum. <br /><br />
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+            Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+            Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem
+            Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
+            source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes
+            of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular
+            during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in
+            section 1.10.32.
           </p>
           <button class="btn btn-outline-secondary rounded-pill px-4" @click="expanded = ! expanded">Show More</button>
         </div>
@@ -285,3 +287,4 @@
     ></script>
   </body>
 </html>
+1

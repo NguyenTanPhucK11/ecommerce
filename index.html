@@ -60,35 +60,42 @@
                 <template
                   x-if="productSorting.find(productSorting => productSorting.id === item.productId) && item.quantity"
                 >
-                  <div
-                    class="row p-2"
-                    x-data="{newProduct : productSorting.find(productSorting => productSorting.id === item.productId)}"
-                  >
-                    <div class="col align-self-center pb-4">
-                      <img :src="newProduct.image" style="height: 60px; width: 60px" />
-                    </div>
-                    <div class="col align-self-center pb-4">
-                      <span x-text="formatMoney(newProduct.price)"></span>
-                    </div>
-                    <div class="col align-self-center pb-4">
-                      <i class="bi bi-dash" @click="sumTotal(-newProduct.price), item.quantity--"></i>
-                      <span x-text="item.quantity"></span>
-                      <i class="bi bi-plus" @click="item.quantity++, sumTotal(newProduct.price)"></i>
-                    </div>
-                    <div class="col align-self-center pb-4">
-                      <span
-                        x-text="formatMoney(newProduct.price * item.quantity)"
-                        x-data="sumTotal(newProduct.price * item.quantity)"
-                      ></span>
+                  <div class="p-2">
+                    <div
+                      class="row pb-2"
+                      x-data="{newProduct : productSorting.find(productSorting => productSorting.id === item.productId)}"
+                    >
+                      <div class="col align-self-center">
+                        <img :src="newProduct.image" style="height: 60px; width: 60px" />
+                      </div>
+                      <div class="col-3 line-clamp-1 align-self-center">
+                        <p x-text="newProduct.title"></p>
+                      </div>
+                      <div class="col align-self-center">
+                        <span x-text="formatMoney(newProduct.price)"></span>
+                      </div>
+                      <div class="col align-self-center">
+                        <i class="bi bi-dash" @click="sumTotal(-newProduct.price), item.quantity--"></i>
+                        <span x-text="item.quantity"></span>
+                        <i class="bi bi-plus" @click="item.quantity++, sumTotal(newProduct.price)"></i>
+                      </div>
+                      <div class="col align-self-center">
+                        <span
+                          x-text="formatMoney(newProduct.price * item.quantity)"
+                          x-data="sumTotal(newProduct.price * item.quantity)"
+                        ></span>
+                      </div>
                     </div>
                     <hr />
                   </div>
                 </template>
               </template>
-              <div class="row total justify-content-around">
-                <div class="col">Total</div>
-                <div class="col">
-                  <span x-money="productPrice" x-text="formatMoney(total)"></span>
+              <div class="container">
+                <div class="row total justify-content-between">
+                  <div class="col-3 align-self-start">Total</div>
+                  <div class="col-3">
+                    <span x-money="productPrice" x-text="formatMoney(total)"></span>
+                  </div>
                 </div>
               </div>
             </div>

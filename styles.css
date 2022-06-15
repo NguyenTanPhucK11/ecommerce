@@ -143,6 +143,12 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 .mt-7 {
   margin-top: 7rem;
@@ -232,7 +238,8 @@ body {
 
 .btn__sale {
   position: absolute;
-  margin: 2px;
+  margin: 0px;
+  border-radius: 0;
   font-size: 12px;
 }
 

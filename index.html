@@ -21,7 +21,7 @@
     formatMoney(money) {
       return '$' + money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     },
-
+    isLoading:true,
     listType:[],
     listTypeImg:[
     'https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg',
@@ -40,7 +40,7 @@
     cartNumber = userId !== null ? userCart.find(cart=>cart.id === listUser.find(u => u.gmail === userId?.email).id).products : cartNumber,
     listProductCurrent = productSorting.slice(pageCurrent,pageCurrent+ pageSize)
     pageTotal = Math.ceil(productSorting.length/pageSize)
-
+    isLoading = false;
     "
   >
     <header class="header">
@@ -185,6 +185,12 @@
       >
         <h2 style="font-weight: 500">Awesome <span style="color: #2879fe">Home Page</span></h2>
         <h2 style="font-weight: 400">Layouts Library</h2>
+        <div
+          class="spinner-grow"
+          x-show="isLoading"
+          style="margin-top: 100px; width: 3rem; height: 3rem"
+          role="status"
+        ></div>
         <div>
           <template
             x-for="type in listType"

@@ -230,6 +230,12 @@ body {
   color: red;
 }
 
+.btn__sale {
+  position: absolute;
+  margin: 2px;
+  font-size: 12px;
+}
+
 .product {
   text-align: start;
 }
@@ -247,7 +253,7 @@ body {
 
 .product .product__sale {
   font-size: 14px;
-  color: grey;
+  color: #202020;
   text-decoration: line-through;
 }
 .product .product__addToCart {

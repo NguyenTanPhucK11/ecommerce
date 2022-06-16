@@ -181,22 +181,55 @@ body {
 /* detail */
 
 .detail {
-  padding: 120px 80px 80px 80px;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+  padding: 120px 0 0 0;
 }
 
-.detail__title {
+.detail .detail__title {
 }
-.detail__price {
-  color: red;
+.detail .detail__price {
+  color: #202020;
 }
-.detail__description {
+.detail .detail__description {
 }
 
-.detail__type {
+.detail .detail__type {
+  font-weight: 500;
+  font-size: 14px;
 }
-.detail__quantity {
+
+.detail .detail__quantity {
 }
-.detail__term {
+
+.detail .detail__btn-addToCart {
+  padding: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 0;
+  width: 50%;
+}
+
+.detail .detail__btn-buyNow {
+  padding: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 0;
+  width: 100%;
+  /* color: #202020; */
+  /* border-color: #202020; */
+}
+.detail .detail__view {
+  font-size: 12px;
+  color: #3c3c3c;
+}
+.detail .detail__term {
+}
+
+.detail .detail__img-thumbnail {
+  margin: 10px;
+  width: 20%;
+  border: 1px solid lightgrey;
 }
 
 /* filter page */
@@ -278,8 +311,31 @@ body {
   left: 60%;
 }
 
+.img-zoom {
+  transition: transform 0.5s;
+}
+
+.img-zoom:hover {
+  transform: scale(1.2);
+}
+
+.un {
+  display: inline-block;
+  padding-bottom: 2px;
+  background-image: linear-gradient(#000, #000);
+  background-position: 0 100%; /*OR bottom left*/
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s, background-position 0s 0.3s; /*change after the size immediately*/
+}
+
+.un:hover {
+  background-position: 100% 100%; /*OR bottom right*/
+  background-size: 100% 2px;
+}
+
 @media only screen and (min-width: 1440px) {
-  .detail {
+  body {
     width: 1440px;
   }
 }

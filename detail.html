@@ -19,21 +19,34 @@
     <header class="header">
       <main-header></main-header>
     </header>
-    <div class="container">
+    <div class="container" x-data="{ isLoading:true}">
       <div
         class="row justify-content-center detail"
-        x-data="{productDetail :[], count : 0, rate:0, totalPrice : 1}"
+        x-data="{productDetail :[], count : 0, rate:0, totalPrice : 1,
+        imgUrl : 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'
+        }"
         x-init="
       detailPathname = window.location.search.split('?')[1] ;
+      detailPathname = detailPathname ?? 1;
+      console.log(detailPathname);
       productDetail = await (await fetch('https://fakestoreapi.com/products/' + detailPathname)).json();
       count = productDetail.rating.count;
       rate =  productDetail.rating.rate;
+      isLoading = false;
       "
       >
-        <div class="col-7 py-4">
-          <img class="img-fluid p-lg-5" width="70%" :src="productDetail.image" alt="" />
+        <div class="col-6 py-4">
+          <div class="spinner-grow text-primary" x-show="isLoading" role="status"></div>
+          <img class="img-zoom img-fluid p-lg-5" width="70%" :src="productDetail.image" alt="" />
+          <div class="row justify-content-center">
+            <template x-for="i in 4">
+              <img class="col detail__img-thumbnail p-lg-4" :src="imgUrl" alt="" />
+            </template>
+          </div>
         </div>
-        <div class="col-12 col-lg-5 text-start">
+        <div class="col-12 col-lg-6 text-start">
+          <h2 class="detail__title py-3" x-text="productDetail.title">Hentum Tosmois de Cras Tele Hamo ></h2>
+          <div class="link-background"></div>
           <div>
             <template x-for="i in 5">
               <i
@@ -43,10 +56,12 @@
             </template>
             <span style="font-size: 15px"><span x-text="count"></span> reviews</span>
           </div>
-          <div class="detail__type py-3">Product Type: <span x-text="productDetail.category"></span></div>
-          <h2 class="detail__title py-3" x-text="productDetail.title">Hentum Tosmois de Cras Tele Hamo ></h2>
+          <div class="detail__type pt-3 py-1">Product Type: <span x-text="productDetail.category"></span></div>
+          <div class="detail__type py-1">Product Code: <span x-text="'W0690042'"></span></div>
+          <div class="detail__type py-1">Availability: <span x-text="'In stock'"></span></div>
+
           <h2 class="detail__price py-3">$<span x-text="(totalPrice*productDetail.price).toFixed(2)"></span></h2>
-          <p class="detail__description py-3" x-text="productDetail.description"></p>
+          <p class="detail__description py-2" x-text="productDetail.description"></p>
           <div class="detail__quantity py-3">Quantity</div>
           <input
             type="number"
@@ -63,13 +78,20 @@
               <span>I agree with the a Terms & conditions</span></label
             >
           </div>
-          <button class="btn btn-primary w-50">Add to cart</button>
+          <div class="row p-1">
+            <button class="col btn detail__btn-addToCart btn-dark mx-2">ADD TO CART</button>
+            <button class="col btn detail__btn-addToCart btn-outline-dark mx-2">
+              <i class="bi bi-suit-heart-fill mx-2"></i> ADD TO FAVORITE
+            </button>
+          </div>
+          <button class="btn detail__btn-buyNow btn-outline-danger my-3">BUY IT NOW</button>
+          <div>
+            <i class="bi bi-eye-fill mx-2"></i> <span class="detail__view"> 38 customers are viewing this product</span>
+          </div>
         </div>
       </div>
     </div>
-    <footer class="footer" style="width: 100% !important">
-      <main-footer></main-footer>
-    </footer>
+
     <script type="module" src="app.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -82,4 +104,7 @@
       crossorigin="anonymous"
     ></script>
   </body>
+  <footer class="footer" style="width: 100% !important">
+    <main-footer></main-footer>
+  </footer>
 </html>

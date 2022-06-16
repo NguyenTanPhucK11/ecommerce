@@ -65,23 +65,24 @@
       }, 
       randomListColor(){
         this.randomColor = []
+        tempColor = [...this.listColor];
+        
         for(let i = 0; i < Math.floor(Math.random() * 4) + 2; i++){
-          this.randomColor.push(Math.floor(Math.random() * this.listColor.length))
+          tempRandom =Math.floor(Math.random() * tempColor.length);
+          console.log(tempColor);
+          this.randomColor.push(tempRandom)
+          indexRandom = tempColor.indexOf(tempRandom)
+          tempColor.splice(indexRandom,1)
         };
         this.newRandomColor = this.randomColor.map((color)=> this.listColor[color]);
         return this.newRandomColor; 
       },
-      filterColor(){
-        const tempColor = this.randomListColor();
-        if(this.refineColor.length <= 0)  
-          return true;
-        if(tempColor.includes('black')) 
-          return true;
-      }
+   
 
       }"
       x-init="
       listProduct = await (await fetch('https://fakestoreapi.com/products')).json();
+
       isLoading = false;
       "
     >
@@ -209,41 +210,39 @@
         >
           <template x-data="{}" x-for="product in listProduct">
             <template x-if="product.price >= rangeValue">
-              <template x-if="filterColor()">
-                <div class="card card__library" style="width: 18rem">
-                  <button class="btn btn-danger btn__sale">
-                    -<span x-text="(randomSale()*100).toFixed()"></span>%
-                  </button>
-                  <img :src="product.image" class="card-img-top" style="height: 200px; padding: 16px" />
-                  <div class="card-body">
-                    <template x-for="i in 5">
-                      <i
-                        :class="i <= product.rating.rate ? 'bi bi-star-fill' : (!Number.isInteger(product.rating.rate) && i < product.rating.rate + 1 ? 'bi bi-star-half' : 'bi bi-star' )"
-                        style="color: #ffc107"
-                      ></i>
-                    </template>
-                    <span><span x-text="product.rating.count"></span> reviews</span>
-                    <p class="product__title line-clamp mt-1"><span x-text="product.title"></span></p>
-                  </div>
-                  <div class="card-footer">
-                    <p style="color: grey">
-                      <span class="product__sale" x-text="'$' + (product.price/(1-sale)).toFixed(2)"></span>
-                      from
-                      <span class="product__price" x-text="'$' + product.price"></span>
-                    </p>
-                    <div class="row p-1">
-                      <template x-for="color in newRandomColor">
-                        <div
-                          class="refine__color"
-                          style="width: 24px; height: 24px"
-                          :style="{backgroundColor : color}"
-                        ></div>
-                      </template>
-                    </div>
-                    <button class="btn product__addToCart btn-outline-primary my-4">Add to cart</button>
-                  </div>
+              <div class="card card__library" style="width: 16rem">
+                <button class="btn btn-danger btn__sale">-<span x-text="(randomSale()*100).toFixed()"></span>%</button>
+                <img :src="product.image" class="card-img-top" style="height: 200px; padding: 16px" />
+                <div class="card-body">
+                  <template x-for="i in 5">
+                    <i
+                      :class="i <= product.rating.rate ? 'bi bi-star-fill' : (!Number.isInteger(product.rating.rate) && i < product.rating.rate + 1 ? 'bi bi-star-half' : 'bi bi-star' )"
+                      style="color: #ffc107"
+                    ></i>
+                  </template>
+                  <span><span x-text="product.rating.count"></span> reviews</span>
+                  <p class="product__title line-clamp mt-1">
+                    <a :href="'/detail.html?' + product.id" x-text="product.title"></a>
+                  </p>
                 </div>
-              </template>
+                <div class="card-footer">
+                  <p style="color: grey">
+                    <span class="product__sale" x-text="'$' + (product.price/(1-sale)).toFixed(2)"></span>
+                    from
+                    <span class="product__price" x-text="'$' + product.price"></span>
+                  </p>
+                  <div class="row p-1">
+                    <template x-for="color in randomListColor()">
+                      <div
+                        class="refine__color"
+                        style="width: 24px; height: 24px"
+                        :style="{backgroundColor : color}"
+                      ></div>
+                    </template>
+                  </div>
+                  <button class="btn product__addToCart btn-outline-primary my-4">Add to cart</button>
+                </div>
+              </div>
             </template>
           </template>
         </div>
@@ -270,9 +269,6 @@
       </div>
     </div>
 
-    <footer class="footer">
-      <main-footer></main-footer>
-    </footer>
     <script type="module" src="app.js"></script>
 
     <script
@@ -286,5 +282,7 @@
       crossorigin="anonymous"
     ></script>
   </body>
+  <footer class="footer">
+    <main-footer></main-footer>
+  </footer>
 </html>
-1

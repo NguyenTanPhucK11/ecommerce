@@ -84,7 +84,7 @@ class Header extends HTMLElement {
             <ul class="navbar-nav mx-auto">
               <template x-for="nav in navbarList">
                 <li class="nav-item" :key="nav">
-                  <a class="nav-link un" href="/category.html" x-text="nav"></a>
+                  <a class="nav-link animation-underline" href="/category.html" x-text="nav"></a>
                 </li>
               </template>
             </ul>

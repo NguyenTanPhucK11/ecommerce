@@ -97,6 +97,8 @@ body {
 }
 
 .footer {
+  position: relative;
+  bottom: 0%;
   background: linear-gradient(180deg, #e0ecff 0%, #ffffff 100%);
   padding: 40px;
 }
@@ -134,7 +136,7 @@ body {
 
 .card__library {
   padding: 0px;
-  margin: 24px;
+  margin: 12px;
 }
 
 .line-clamp {
@@ -319,7 +321,7 @@ body {
   transform: scale(1.2);
 }
 
-.un {
+.animation-underline {
   display: inline-block;
   padding-bottom: 2px;
   background-image: linear-gradient(#000, #000);
@@ -329,9 +331,29 @@ body {
   transition: background-size 0.3s, background-position 0s 0.3s; /*change after the size immediately*/
 }
 
-.un:hover {
+.animation-underline:hover {
   background-position: 100% 100%; /*OR bottom right*/
   background-size: 100% 2px;
+}
+
+a:link {
+  text-decoration: none;
+  color: #202020;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #202020;
+}
+
+a:hover {
+  text-decoration: none;
+  padding: 2px;
+  border-bottom: #202020 0.125em solid;
+}
+
+a:active {
+  text-decoration: underline;
 }
 
 @media only screen and (min-width: 1440px) {

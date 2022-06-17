@@ -361,7 +361,7 @@ body {
   font-weight: 700;
   font-size: 13px;
   border-radius: 0;
-  width: 50%;
+  width: 100%;
 }
 
 .card-footer {
@@ -425,7 +425,7 @@ a:active {
   left: 0;
   right: 0;
   /* background-color: rgb(205, 191, 191); */
-  background-color: whitesmoke;
+
   border: 1px #202020;
   overflow: hidden;
   width: 100%;
@@ -442,7 +442,7 @@ a:active {
   color: #202020;
   font-size: 20px;
   position: absolute;
-  top: 10%;
+  top: 31%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);

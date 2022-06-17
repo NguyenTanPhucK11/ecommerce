@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- <header class="header">
+    <header class="header">
       <main-header></main-header>
     </header>
     <div class="container login">
@@ -29,43 +29,9 @@
       <div id="invalid-user"></div>
 
       <button class="btn btn-primary" id="btn-login" type="button">Login</button>
-    </div> -->
-    <footer
-      class="footer"
-      x-data="{
-      footer : [{title : 'SHOP', subTitle:['New In','Women','Men','Shoes','Bags & Accessories','Top Brands','Sale & Special Offers','Lookbook']},
-      {title : 'INFORMATION', subTitle:['About','Customer Service','Reward Program','Shipping & Returns','Privacy Policy','Bulk Editor','Blog']},
-      {title : 'CUSTOMER SERVICE', subTitle:['Search Terms','Advanced Search','Orders and Returns','Contact Us','Theme FAQs','Consultant','Store Locations']}
-      ]
-    }"
-    >
-      <div class="row text-start">
-        <template x-for="f in footer">
-          <div class="col">
-            <div class="footer__title" x-text="f.title"></div>
-            <template x-for="s in f.subTitle">
-              <div class="footer__subTitle" x-text="s"></div>
-            </template>
-          </div>
-        </template>
-        <div class="col-5">
-          <div class="footer__title">STAY CONNECT</div>
-          <div class="col-5 d-flex justify-content-start">
-            <i class="col bi-facebook" style="color: aliceblue; font-size: 24px"></i>
-            <i class="col bi-instagram" style="color: aliceblue; font-size: 24px"></i>
-            <i class="col bi-youtube" style="color: aliceblue; font-size: 24px"></i>
-          </div>
-          <div class="footer__title py-4">SIGN UP FOR OUR NEWSLETTER</div>
-          <div class="row">
-            <input
-              class="col-4 footer__inputForm form-control w-50"
-              placeholder="enter your email address"
-              type="text"
-            />
-            <button class="col-2 footer__submit btn btn-dark">SUBMIT</button>
-          </div>
-        </div>
-      </div>
+    </div>
+    <footer>
+      <main-footer></main-footer>
     </footer>
     <script type="module" src="app.js"></script>
     <script

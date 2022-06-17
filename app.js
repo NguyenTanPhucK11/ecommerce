@@ -116,30 +116,65 @@ class Header extends HTMLElement {
 
 class Footer extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = ` <div class="col">
-    <h3>Support System</h3>
-    <img
-      class="footer__img"
-      src="https://images.ctfassets.net/hrltx12pl8hq/31f9j3A3xKasyUMMsuIQO8/6a8708add4cb4505b65b1cee3f2e6996/9db2e04eb42b427f4968ab41009443b906e4eabf-people_men-min.jpg?fit=fill&w=368&h=207"
-      alt=""
-    />
-    <div class="footer__content">
-      All requests will be processed manually by our developer or our support staff during
-      <div style="font-weight: 700">24 hours (Monday - Friday, 10.00 - 20.00 GMT+2)</div>
-      We will try to reply as fast as we can. Will be in touch.
-    </div>
-    <button class="btn btn-success footer__question">
-      <i class="col bi-question-circle-fill" style="padding: 5px"></i>
-      ASK A QUESTION
-    </button>
-
-    <div class="footer__overwrite">© Wokiee 2022. All Rights Reserved.</div>
-    <div class="row d-flex justify-content-center">
-      <div class="col-2 d-flex justify-content-center">
-        <i class="col bi-facebook"></i>
-        <i class="col bi-instagram"></i>
-        <i class="col bi-youtube"></i>
+    this.innerHTML = `<div
+    class="footer"
+    x-data="{
+    footer : [{title : 'SHOP', subTitle:['New In','Women','Men','Shoes','Bags & Accessories','Top Brands','Sale & Special Offers','Lookbook']},
+    {title : 'INFORMATION', subTitle:['About','Customer Service','Reward Program','Shipping & Returns','Privacy Policy','Bulk Editor','Blog']},
+    {title : 'CUSTOMER SERVICE', subTitle:['Search Terms','Advanced Search','Orders and Returns','Contact Us','Theme FAQs','Consultant','Store Locations']}
+    ],
+    preferCardVisa:'https://cdn.shopify.com/s/files/1/0071/4755/2866/files/',
+    listImgCardVisa : ['Visa_Inverted_x32.png?v=1541586136','MasterCard_x32.png?v=1541586157','American-Express_x32.png?v=1541586174','Cirrus_Inverted_x32.png?v=1541586249','Discover_x32.png?v=1541586268','PayPal_x32.png?v=1541586200','Western_Union_x32.png?v=1541586300'],
+  }"
+  >
+    <div class="row text-start px-4">
+      <template x-for="f in footer">
+        <div class="col">
+          <div class="footer__title" x-text="f.title"></div>
+          <template x-for="s in f.subTitle">
+            <div class="footer__subTitle" x-text="s"></div>
+          </template>
+        </div>
+      </template>
+      <div class="col-12 col-sm-8 col-lg-5 col-xl-4">
+        <div class="footer__title py-2 py-lg-0">STAY CONNECT</div>
+        <div class="row">
+          <div class="col py-3 footer__icon">
+            <i class="col bi-facebook px-1"></i>
+            <i class="col bi-instagram px-1"></i>
+            <i class="col bi-youtube px-1"></i>
+          </div>
+          <div class="col col-sm-7 align-self-center">
+            <div class="footer__title">LIKE US ON FACEBOOK</div>
+            <div>
+              <button class="footer__likeShare btn btn-primary">
+                <i class="bi bi-hand-thumbs-up-fill px-1"></i>Like 26k
+              </button>
+              <button class="footer__likeShare btn btn-primary">Share</button>
+            </div>
+          </div>
+        </div>
+        <div class="footer__title py-3">SIGN UP FOR OUR NEWSLETTER</div>
+        <div class="row m-0">
+          <input
+            class="footer__inputForm form-control me-2 py-2"
+            placeholder="enter your email address"
+            type="text"
+          />
+          <button class="col-3 col-lg-3 footer__submit btn btn-dark">SUBMIT</button>
+        </div>
       </div>
+    </div>
+    <div class="footer__subTitle">
+      <hr />
+      <div>
+        © 2020 Ella Demo. All Rights Reserved. <br />
+        Ecommerce Software by Shopify. Shopify Themes by HaloThemes.com.
+      </div>
+
+      <template x-for="visa in listImgCardVisa">
+        <img class="footer__cardVisa m-1" :src="preferCardVisa + visa " alt="" />
+      </template>
     </div>
   </div>`;
   }

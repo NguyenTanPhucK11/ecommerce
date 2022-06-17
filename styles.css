@@ -193,15 +193,28 @@ body {
 .detail .detail__price {
   color: #202020;
 }
+.detail .detail__subTotal {
+  color: #202020;
+  font-size: 13px;
+  font-weight: 500;
+}
 .detail .detail__description {
+}
+.detail .detail__quantity {
+  color: #202020;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.detail .detail__leftStock {
+  margin-left: 20px;
+  color: #d62828;
+  font-size: 12px;
 }
 
 .detail .detail__type {
   font-weight: 500;
   font-size: 14px;
-}
-
-.detail .detail__quantity {
 }
 
 .detail .detail__btn-addToCart {

@@ -25,7 +25,7 @@
     <div
       class="refine row"
       x-data="{
-      rangeValue : 0, listSize:['XS', 'S', 'M','L', 'XL'],
+      rangeValue : 1, listSize:['XS', 'S', 'M','L', 'XL'],
       isLoading : true,
       listProduct:[],
       listCategory: ['electronics','jewelery','men\'s clothing','women\'s clothing'],
@@ -36,7 +36,6 @@
       randomColor : [],
       newRandomColor :[],
       refineColor : [],
-      rangeValue : 0,
       isASCPrice : null,
       isASCStar : null,
       isBlur : false,
@@ -121,8 +120,9 @@
             x-model="rangeValue"
             id="range-price"
           />
-          <div class="refine__rangePrice my-2">
-            $<span x-text="rangeValue"></span><span> to </span>$<span x-text="999"></span>
+          <div class="row refine__rangePrice m-0 my-2">
+            <input class="col form-control" x-model="rangeValue" type="text" :value="rangeValue" />
+            <div class="col-8 align-self-center"><span> to </span>$<span x-text="999"></span></div>
           </div>
         </div>
         <div class="refine__brand" x-data="{ open: true }">

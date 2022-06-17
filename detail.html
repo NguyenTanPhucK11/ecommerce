@@ -23,7 +23,14 @@
       <div
         class="row justify-content-center detail"
         x-data="{productDetail :[], count : 0, rate:0, totalPrice : 1, leftStock:10,
-        imgUrl : 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'
+        imgUrl : 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+        listFakeBaloImg :['https://cdn.shopify.com/s/files/1/1236/1344/products/balo-oxford-den-bags-leonardo-14032378986601_600x.jpg?v=1622169041',
+        'https://cdn.shopify.com/s/files/1/1236/1344/products/balo-oxford-xam-bags-leonardo-14993749540969_1cd62a28-e803-451b-bbe9-5019a8440ffc_600x.png?v=1640587867',
+        'https://cdn.shopify.com/s/files/1/1236/1344/products/DSC07924-1_600x.jpg?v=1640587867',
+        'https://cdn.shopify.com/s/files/1/1236/1344/products/balo-oxford-bags-leonardo-14032379019369_600x.jpg?v=1640587867',
+        'https://cdn.shopify.com/s/files/1/1236/1344/products/leonardo-oxford-backpack-goc-can-4_600x.jpg?v=1640587867',
+        ],
+        productImgCurrent : null,
         }"
         x-init="
       detailPathname = window.location.search.split('?')[1] ;
@@ -32,15 +39,27 @@
       productDetail = await (await fetch('https://fakestoreapi.com/products/' + detailPathname)).json();
       count = productDetail.rating.count;
       rate =  productDetail.rating.rate;
+      productImgCurrent = productDetail.image;
       isLoading = false;
       "
       >
         <div class="col-6 py-4">
           <div class="spinner-grow text-primary" x-show="isLoading" role="status"></div>
-          <img class="img-zoom img-fluid p-lg-5" width="70%" :src="productDetail.image" alt="" />
-          <div class="row justify-content-center">
-            <template x-for="i in 4">
-              <img class="col detail__img-thumbnail p-lg-4" :src="productDetail.image" alt="" />
+          <img
+            class="img-zoom img-fluid p-lg-5"
+            width="70%"
+            :src="productImgCurrent"
+            alt=""
+            x-model="productImgCurrent"
+          />
+          <div class="row justify-content-center mx-2">
+            <template x-for="fakeBaloImg in listFakeBaloImg">
+              <img
+                class="col detail__img-thumbnail"
+                :src="fakeBaloImg"
+                @click="productImgCurrent = fakeBaloImg"
+                alt=""
+              />
             </template>
           </div>
         </div>

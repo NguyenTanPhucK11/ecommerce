@@ -210,7 +210,7 @@
         >
           <template x-data="{}" x-for="product in listProduct">
             <template x-if="product.price >= rangeValue">
-              <div class="card card__library" style="width: 16rem">
+              <div class="card card__library container" style="width: 16rem">
                 <button class="btn btn-danger btn__sale">-<span x-text="(randomSale()*100).toFixed()"></span>%</button>
                 <img :src="product.image" class="card-img-top" style="height: 200px; padding: 16px" />
                 <div class="card-body">
@@ -240,7 +240,9 @@
                       ></div>
                     </template>
                   </div>
-                  <button class="btn product__addToCart btn-outline-primary my-4">Add to cart</button>
+                  <div class="overlay">
+                    <button class="btn product__btn-addToCart btn-outline-dark text-overlay my-4">ADD TO CART</button>
+                  </div>
                 </div>
               </div>
             </template>

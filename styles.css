@@ -99,7 +99,7 @@ body {
 .footer {
   position: relative;
   bottom: 0%;
-  background: linear-gradient(180deg, #e0ecff 0%, #ffffff 100%);
+  background-color: #3c3c3c;
   padding: 40px;
 }
 
@@ -132,6 +132,35 @@ body {
   line-height: 24px;
   font-weight: 300;
   color: #777;
+}
+
+.footer .footer__title {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.footer .footer__subTitle {
+  color: #969696;
+  font-size: 12px;
+  line-height: 1.8rem;
+}
+
+.footer .footer__inputForm {
+  color: #969696;
+  font-size: 12px;
+  background-color: #202020;
+  border-radius: 0;
+  border: 0.5px solid #969696;
+}
+
+.footer .footer__submit {
+  /* background-color: #3b3b3b; */
+  border-color: #3b3b3b;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
 }
 
 .card__library {
@@ -405,7 +434,7 @@ a:active {
 
 @media only screen and (min-width: 1440px) {
   body {
-    width: 1440px;
+    /* width: 1440px; */
   }
 }
 

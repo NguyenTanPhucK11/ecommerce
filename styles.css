@@ -347,6 +347,27 @@ body {
   font-weight: 400;
   white-space: normal;
 }
+
+.product__title a:link {
+  text-decoration: none;
+  color: #202020;
+}
+
+.product__title a:visited {
+  text-decoration: none;
+  color: #202020;
+}
+
+.product__title a:hover {
+  text-decoration: none;
+
+  border-bottom: #202020 0.125em solid;
+}
+
+.product__title a:active {
+  text-decoration: underline;
+}
+
 .product .product__price {
   color: red;
   font-weight: 700;
@@ -398,26 +419,6 @@ body {
   background-position: 100% 100%; /*OR bottom right*/
   background-size: 100% 2px;
 }
-
-/* a:link {
-  text-decoration: none;
-  color: #202020;
-}
-
-a:visited {
-  text-decoration: none;
-  color: #202020;
-}
-
-a:hover {
-  text-decoration: none;
-  padding: 2px;
-  border-bottom: #202020 0.125em solid;
-}
-
-a:active {
-  text-decoration: underline;
-} */
 
 .overlay {
   position: absolute;

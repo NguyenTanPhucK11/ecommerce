@@ -167,7 +167,7 @@
         <p>See what others have said about their experience!</p>
 
         <template class="row" x-for="img,idx in listType" :key="img">
-          <div class="category__img" style="width: 18rem">
+          <div class="category__img" style="width: 15rem">
             <img width="100px" height="100px" :src="listTypeImg[idx]" />
             <h5 x-text="listType[idx]"></h5>
           </div>
@@ -223,6 +223,8 @@
             <div class="card-body">
               <h5 class="card-title" x-text="product.category"></h5>
               <p class="card-text line-clamp" x-text="product.title"></p>
+            </div>
+            <div class="card-footer">
               <p class="card-text"><span x-text="formatMoney(product.price)"></span></p>
               <p class="card-text">
                 <template x-for="s in Math.round(product.rating.rate)">
@@ -234,14 +236,14 @@
                 href="#"
                 class="btn btn-primary"
                 @click=" 
-                event.stopPropagation();
-                newCart = cartNumber?.find(card=>card.productId === product.id)
-                if(newCart) {
-                  newCart.quantity++;
-                  sumTotal(productSorting.find(productSorting => productSorting.id === product.id).price)
-                } else{
-                  cartNumber.push({productId : product.id, quantity:1})
-                }"
+              event.stopPropagation();
+              newCart = cartNumber?.find(card=>card.productId === product.id)
+              if(newCart) {
+                newCart.quantity++;
+                sumTotal(productSorting.find(productSorting => productSorting.id === product.id).price)
+              } else{
+                cartNumber.push({productId : product.id, quantity:1})
+              }"
               >
                 Add to cart
               </button>
@@ -249,6 +251,7 @@
           </div>
         </template>
         <div
+          class="my-4"
           x-data="{ 
             fetchAPI(page) { 
               pageCurrent = (page-1)*pageSize,

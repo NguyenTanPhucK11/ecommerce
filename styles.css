@@ -399,7 +399,7 @@ body {
   background-size: 100% 2px;
 }
 
-a:link {
+/* a:link {
   text-decoration: none;
   color: #202020;
 }
@@ -417,7 +417,7 @@ a:hover {
 
 a:active {
   text-decoration: underline;
-}
+} */
 
 .overlay {
   position: absolute;

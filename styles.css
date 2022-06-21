@@ -2,6 +2,8 @@ body {
   max-width: 100%;
   margin: auto;
   text-align: center;
+  /* background-color: rgba(80, 80, 80, 0.06); */
+  opacity: 1 !important;
 }
 
 .carousel {
@@ -53,6 +55,10 @@ body {
   width: 200px;
   height: 200px;
   padding: 20px;
+}
+
+.navbar {
+  padding: 0;
 }
 
 .nav-link {
@@ -300,9 +306,19 @@ body {
 }
 
 .refine {
-  padding: 80px 40px 40px 40px;
+  padding: 0px 40px 40px 40px;
   font-size: 16px;
   color: #202020;
+}
+
+.refine .refine__thumbnail {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .refine .refine__category {
@@ -392,7 +408,7 @@ body {
 }
 
 .loading {
-  position: fixed; /* or absolute */
+  position: absolute; /* or absolute */
   top: 40%;
   left: 60%;
 }
@@ -454,6 +470,10 @@ body {
 @media only screen and (min-width: 1440px) {
   body {
     /* width: 1440px; */
+  }
+  .refine {
+    width: 1440px;
+    margin: 0 auto;
   }
 }
 

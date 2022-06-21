@@ -1,4 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
+
 import {
   getAuth,
   signOut,
@@ -61,8 +62,17 @@ const checkSignIn = () => {
 class Header extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-    <div 
-  >    
+    <div
+    x-data ="{
+      cartNumber : [],
+      userId : '',
+      productCategory : [],
+      formatMoney(money) {
+        return '$' + money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      },
+    }"
+    x-init="productCategory = await (await fetch('https://fakestoreapi.com/products')).json()"
+    >    
     <nav
         x-data="{navbarList : ['LAYOUTS', 'CATEGORY', 'FEATURES', 'TESTIMONIALS' ,'SUPPORT NEW']}"
         class="navbar fixed-top navbar-expand-lg navbar-light bg-light"
@@ -109,7 +119,69 @@ class Header extends HTMLElement {
           </div>
         </div>
       </nav>
+      <div class="modal fade" id="cart" tabindex="-1" aria-labelledby="cartLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cartLabel" x-text="userId?.email"></h5>
+            <a class="px-2" onclick="logOut()" data-bs-dismiss="modal" x-text="userId === null ? '' :'log out' "></a>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="cartItems">
+              <template x-for="item,idx in cartNumber">
+                <template
+                  x-if="productCategory.find(productCategory => productCategory.id === item.productId) && item.quantity"
+                >
+                  <div class="p-2">
+                    <div
+                      class="row pb-2"
+                      x-data="{newProduct : productCategory.find(productCategory => productCategory.id === item.productId)}"
+                    >
+                      <div class="col align-self-center">
+                        <img :src="newProduct.image" style="height: 60px; width: 60px" />
+                      </div>
+                      <div class="col-3 line-clamp-1 align-self-center">
+                        <p x-text="newProduct.title"></p>
+                      </div>
+                      <div class="col align-self-center">
+                        <span x-text="formatMoney(newProduct.price)"></span>
+                      </div>
+                      <div class="col align-self-center">
+                        <i class="bi bi-dash" @click="sumTotal(-newProduct.price), item.quantity--"></i>
+                        <span x-text="item.quantity"></span>
+                        <i class="bi bi-plus" @click="item.quantity++, sumTotal(newProduct.price)"></i>
+                      </div>
+                      <div class="col align-self-center">
+                        <span
+                          x-text="formatMoney(newProduct.price * item.quantity)"
+                          x-data="sumTotal(newProduct.price * item.quantity)"
+                        ></span>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                </template>
+              </template>
+              <div class="container">
+                <div class="row total justify-content-between">
+                  <div class="col-3 align-self-start">Total</div>
+                  <div class="col-3">
+                    <span x-money="productPrice" x-text="formatMoney(total)"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="btn-buy" class="btn btn-primary" data-bs-dismiss="modal">Buy</button>
+          </div>
+        </div>
       </div>
+    </div>
+      </div>
+      
     `;
   }
 }

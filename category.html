@@ -117,7 +117,13 @@
                             <span x-text="formatMoney(newProduct.price)"></span>
                           </div>
                           <div class="col align-self-center">
-                            <i class="bi bi-dash" @click="sumTotal(-newProduct.price), item.quantity-=1"></i>
+                            <i
+                              class="bi bi-dash"
+                              @click="
+                              sumTotal(-newProduct.price), 
+                              item.quantity > 1 ? item.quantity-- : cartNumber.splice(idx,1)
+                              "
+                            ></i>
                             <span x-text="item.quantity"></span>
                             <i class="bi bi-plus" @click="item.quantity++, sumTotal(newProduct.price)"></i>
                           </div>
@@ -319,23 +325,25 @@
       </div>
       <div class="col-12 col-sm-7 col-lg-9 col-xxl-10">
         <!-- <span x-data="{date: new Date()}" x-text="date.toLocaleString()"></span> -->
-        <div class="row justify-content-start">
-          <div class="col">
+        <div class="row justify-content-start py-3">
+          <div class="col align-self-center">
             PRICE
             <i
               :class="isASCPrice === null ? 'bi bi-arrow-down-up' : (isASCPrice ? 'bi bi-arrow-up' : 'bi bi-arrow-down' )"
               @click="sortPrice()"
             ></i>
           </div>
-          <div class="col">
+          <div class="col align-self-center">
             STAR
             <i
               :class="isASCStar === null ? 'bi bi-arrow-down-up' : (isASCStar ? 'bi bi-arrow-up' : 'bi bi-arrow-down')"
               @click="sortStar()"
             ></i>
           </div>
+          <div class="col align-self-center">
+            <input class="form-control" type="input" x-model.debounce.300ms="search" placeholder="Search" />
+          </div>
         </div>
-        <input x-model.debounce.300ms="search" placeholder="Search" />
         <div
           class="loading spinner-grow text-primary"
           x-show="isLoading"
@@ -387,8 +395,10 @@
                       newCart = cartNumber?.find(card=>card.productId === product.id)
                       if(newCart) {
                         newCart.quantity++;
-                        sumTotal(productSorting.find(productSorting => productSorting.id === product.id).price)
+                        console.log(listProduct.find(listProduct => listProduct.id === product.id).price);
+                        sumTotal(listProduct.find(listProduct => listProduct.id === product.id).price)
                       } else{
+
                         cartNumber.push({productId : product.id, quantity:1})
                       }
                       "

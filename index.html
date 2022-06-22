@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- <script src="./node_modules/@alpinejs/persist/dist/cdn.min.js"></script> -->
-    <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
 
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -20,7 +20,7 @@
   </head>
   <body
     x-data="{productCategory: [], userCart:[],productSorting :[], listProductCurrent :[], pageCurrent :0, pageSize : 4, pageTotal:0, 
-    cartNumber : $persist(), total:0, 
+    cartNumber : $persist([]), total:0, 
     userId: null,
     sumTotal(price){this.total+=price ; if(this.total <=0) {this.total =0}}, 
     listUser:[{id:1, gmail: '1@gmail.com'}, {id:2, gmail: '2@gmail.com'},{id:3, gmail: '3@gmail.com'},{id:4, gmail: '4@gmail.com'},{id:5, gmail: '5@gmail.com'}],

@@ -23,21 +23,18 @@
     class="filter"
     x-data="{
     cartNumber : $persist(),
-  }"
+    userId : '',
+    productCategory : [],
+    total : 0,
+    sumTotal(price){this.total+=price}, 
+    formatMoney(money) {
+      return '$' + money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    },
+    }"
+    x-init="productCategory = await (await fetch('https://fakestoreapi.com/products')).json()"
   >
     <header class="header">
-      <div
-        x-data="{
-        userId : '',
-        productCategory : [],
-        total : 0,
-        sumTotal(price){this.total+=price ; if(this.total <=0) {this.total =0}}, 
-        formatMoney(money) {
-          return '$' + money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-        },
-        }"
-        x-init="productCategory = await (await fetch('https://fakestoreapi.com/products')).json()"
-      >
+      <div>
         <nav
           x-data="{navbarList : ['LAYOUTS', 'CATEGORY', 'FEATURES', 'TESTIMONIALS' ,'SUPPORT NEW']}"
           class="navbar fixed-top navbar-expand-lg navbar-light bg-light"
@@ -100,13 +97,11 @@
               <div class="modal-body">
                 <div class="cartItems">
                   <template x-for="item,idx in cartNumber">
-                    <template
-                      x-if="productCategory.find(productCategory => productCategory.id === item.productId) && item.quantity"
-                    >
+                    <template x-if="productCategory.find(product => product.id === item.productId)">
                       <div class="p-2">
                         <div
                           class="row pb-2"
-                          x-data="{newProduct : productCategory.find(productCategory => productCategory.id === item.productId)}"
+                          x-data="{newProduct : productCategory.find(product => product.id === item.productId)}"
                         >
                           <div class="col align-self-center">
                             <img :src="newProduct.image" style="height: 60px; width: 60px" />
@@ -122,6 +117,7 @@
                               class="bi bi-dash"
                               @click="
                               sumTotal(-newProduct.price), 
+                              console.log(cartNumber);
                               item.quantity > 1 ? item.quantity-- : cartNumber.splice(idx,1)
                               "
                             ></i>
@@ -396,10 +392,8 @@
                       newCart = cartNumber?.find(card=>card.productId === product.id)
                       if(newCart) {
                         newCart.quantity++;
-                        console.log(listProduct.find(listProduct => listProduct.id === product.id).price);
                         sumTotal(listProduct.find(listProduct => listProduct.id === product.id).price)
                       } else{
-
                         cartNumber.push({productId : product.id, quantity:1})
                       }
                       "
